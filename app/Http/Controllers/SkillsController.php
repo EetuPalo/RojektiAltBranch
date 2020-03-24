@@ -24,21 +24,14 @@ class SkillsController extends Controller
     public function index()
     {
 
-         //$userId = Auth::id();
+        //$userId = Auth::id();
         //$user = DB::table('users')->where("id", $userId)->first();
-
          //$skillvalues = SkillsValue::with("user")->where("user_id")->get();
-
-
         $skills = Skills::all();
         $rating = DB::table('skills_values')->get("rating");
-
         $update = SkillsValue::with("skill")->where("skill_id")->get();
 
-
-
-
-        return view("auth/skills", ["skill" => $skills, "update" => $update, "rating" => $rating]);
+        return view("auth/skills", ["skills" => $skills, "update" => $update, "rating" => $rating]);
     }
 
 
@@ -46,22 +39,29 @@ class SkillsController extends Controller
     {
 
         $skills = [];
-        /*
         $skills = new SkillsValue;
         $skills = [
-        "user_id" => $request->input('user_id'),
-        "idForRating" => request("idForSkill"),
-        "rating" => request("rating")   
+            "user_id" => $request->input('user_id'),
+            "skill_id" => $request->input("skill_id"),
+            "rating" => request("rating")   
         ];
-
+        /*
+        if ($skills->user_id.is_null())
+        {
+            $skills->user_id = (Auth::id());
+        }
+        */
         SkillsValue::insert($skills);
-*/
+
+
+        /*
         $skills = new SkillsValue;
         $skills->user_id = request('id');
         $skills->user_id = request('user_id');
         $skills->skill_id = request("skill_id");
         $skills->rating = request("rating");
         $skills->save();
+        */
         return redirect()->back()->with('message', 'Ratings have been saved!', ["skills" => $skills]);
     }
 

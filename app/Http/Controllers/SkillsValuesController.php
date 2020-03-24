@@ -18,19 +18,18 @@ class SkillsValuesController extends Controller
 {
 
 
-public function __construct( Skills $skills)
+public function __construct( Skills $skills, SkillsValues $skillValues)
     {
         $this->skills = $skills->all();
-
+        $this->skillValues = $skillValues->all();
     }
 
     public function index()
     {
-           $skill = Skills::all();
-           $skills = SkillsValues::all();
-  
-        return view("auth/modify", ["skill" => $skills]);
-        }
+        $skills = Skills::all();
+        $skillValues = SkillsValues::all(); 
+        return view("auth/modify", ["skill" => $skills], ["skillValues" => $skillValues]);
+    }
 
     
    public function create()
