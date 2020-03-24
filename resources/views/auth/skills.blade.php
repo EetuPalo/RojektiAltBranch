@@ -1,9 +1,6 @@
 @extends('layouts.app')
-
 @section('content')
-
-
- @if (Auth::user()->id)
+@if (Auth::user()->id)
 
 
 
@@ -14,8 +11,7 @@
         <h3>Hello {{ Auth::user()->name }}</h3>
         <button type="button" class="btn btn-success btn-link"> <a href="{{ route("addskill.create") }}">Add a new skill</a></button>           
         <br><br>
-        <form method="post" action="{{ route('skills.store') }}">
-        <div class="table">               
+        <form method="post" action="{{ route('skills.store') }}">            
         <table class="table table-hover">
             <thead>
                 <tr>
@@ -25,41 +21,27 @@
                 <tr>
             </thead>
             <tbody>
-
-            <tbody>
-
-@foreach ($skill as $skill)
-
-
-
- 
- 
-      <td><input class="form-check-input" type="checkbox" name="rating[]" value="" id="defaultCheck1">{{$skill->skill}}</td>
-      <td> 
-      {{ $rating }}
-    
-      <select class="form-control-m"  name="rating" id="rating"  value="{{ ('rating') }}">  
-      <option></option>
-      <option>1</option>
-      <option>2</option>
-      <option>3</option>
-      <option>4</option>
-      <option>5</option>
-      </select>
-    
-      </td>
- 
-      </th>
-      <td>{{ $skill->created_at }}</td>
-      <input  type="hidden" name="user_id" value="{{Auth::id("user_id")}}">
-                 </div>
-                    
- 
-          @endforeach
+            @foreach ($skill as $skill)
+            <tr>
+                 <td><input class="form-check-input" type="checkbox" name="rating[]" value="" id="defaultCheck1">{{$skill->skill}}</td>
+                  <td> 
+                      {{ $rating }}    
+                      <select class="form-control-m"  name="rating" id="rating"  value="{{ ('rating') }}">  
+                      <option></option>
+                      <option>1</option>
+                      <option>2</option>
+                      <option>3</option>
+                      <option>4</option>
+                      <option>5</option>
+                      </select>    
+                  </td>
+                  <td>{{ $skill->created_at }}</td>
+                  <input  type="hidden" name="user_id" value="{{Auth::id("user_id")}}">                    
+            </tr>                 
+            @endforeach
          </tr>
         </tbody>
         </table>
-
         </form>
 
     <button type="submit" class="btn btn-success" method="post" name="store" action="{{ route("skills.store")}}">
@@ -68,18 +50,16 @@
     </button>
 
     @foreach ($update as $update)
-  <td>
-    <form action="{{ route("skills.update", ['skill'=>$update->skill]) }}" method="post">
-
-      {{ csrf_field() }}
-      <input type="hidden" name="_method" value="update">
-<button>
-      <input type="submit" name="update" value="update" class="btn btn-success" onclick="return confirm('Are you sure you want to update this rating?')">
-</button>
-    </form>
-  </td>
-
-@endforeach
+      <td>
+        <form action="{{ route("skills.update", ['skill'=>$update->skill]) }}" method="post">
+          {{ csrf_field() }}
+            <input type="hidden" name="_method" value="update">
+            <button>
+                  <input type="submit" name="update" value="update" class="btn btn-success" onclick="return confirm('Are you sure you want to update this rating?')">
+            </button>
+        </form>
+      </td>
+    @endforeach
 
 
 

@@ -42,15 +42,12 @@ public function __construct( Skills $skills)
     }
  
 
-        protected function show(Request $request)
-
+    protected function show(Request $request)
     {
             return Validator::make( [
             'rating' => ['required|integer'],
             "user_id" => ["required|string"],
-            'skill_id' => ['required|string']
-          
-
+            'skill_id' => ['required|string']         
         ]);
         }
 
@@ -70,9 +67,6 @@ public function __construct( Skills $skills)
         $values = SkillsValue::create()->get($request->all()([
         "user_id" => $request->update->get()
        ]));
-
-
-
         /*
         $values = new SkillsValue;
         $values = SkillsValue::all([
@@ -80,9 +74,9 @@ public function __construct( Skills $skills)
         $values->user_id = request("user_id"),
         $values->idForRating = request("skill"),
         $values->rating = request("rating"),
-        $values->save()]);*/
-
-      return view ('auth.home', ["values" => $values]);  
+        $values->save()]);
+        */
+        return view ('auth.home', ["values" => $values]);  
       }
 
     protected function update(Request $request)
