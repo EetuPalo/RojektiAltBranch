@@ -66,6 +66,7 @@ public function __construct( Skills $skills, SkillsValues $skillValues)
         $values = SkillsValue::create()->get($request->all()([
         "user_id" => $request->update->get()
        ]));
+       //dont uncomment
         /*
         $values = new SkillsValue;
         $values = SkillsValue::all([
